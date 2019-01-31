@@ -1,0 +1,33 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.ftn.tickets"
+        },
+        "jhipsterVersion": "5.7.2",
+        "applicationType": "monolith",
+        "baseName": "tickets",
+        "packageName": "com.ftn.tickets",
+        "packageFolder": "com/ftn/tickets",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": "eureka",
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "MmM1NzBmNGUwOGQxMjA0NjRlMzAyNmE0MjZhZmFjZWUxMWNjYThhODA3NmFjYTc1MTllYTA1MDkwNjBlYWI0NTBkNjg4NzcwZTA2MTEyYjFlYzFiY2ZjMDczODNkMDFmYzNhMTM2NGQ4OWRhODRmMDUyMzJhOGY5YTNkNjFkY2Q=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "otherModules": [],
+        "enableTranslation": false
+    }
+}
