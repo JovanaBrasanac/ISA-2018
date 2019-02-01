@@ -5,6 +5,7 @@ import com.ftn.tickets.config.Constants;
 import com.ftn.tickets.domain.Authority;
 import com.ftn.tickets.domain.User;
 import com.ftn.tickets.repository.AuthorityRepository;
+import com.ftn.tickets.repository.UserExtraRepository;
 import com.ftn.tickets.repository.UserRepository;
 import com.ftn.tickets.security.AuthoritiesConstants;
 import com.ftn.tickets.service.MailService;
@@ -55,6 +56,9 @@ public class AccountResourceIntTest {
     private UserRepository userRepository;
 
     @Autowired
+    private UserExtraRepository userExtraRepository;
+
+    @Autowired
     private AuthorityRepository authorityRepository;
 
     @Autowired
@@ -84,10 +88,10 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(any());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, userExtraRepository);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService, userExtraRepository);
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)
