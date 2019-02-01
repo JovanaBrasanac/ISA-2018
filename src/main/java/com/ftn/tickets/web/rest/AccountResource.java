@@ -3,6 +3,8 @@ package com.ftn.tickets.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import com.ftn.tickets.domain.User;
+import com.ftn.tickets.domain.UserExtra;
+import com.ftn.tickets.repository.UserExtraRepository;
 import com.ftn.tickets.repository.UserRepository;
 import com.ftn.tickets.security.SecurityUtils;
 import com.ftn.tickets.service.MailService;
@@ -34,13 +36,16 @@ public class AccountResource {
 
     private final UserRepository userRepository;
 
+    private final UserExtraRepository userExtraRepository;
+
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, UserExtraRepository userExtraRepository) {
 
         this.userRepository = userRepository;
+        this.userExtraRepository = userExtraRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -101,9 +106,28 @@ public class AccountResource {
     @GetMapping("/account")
     @Timed
     public UserDTO getAccount() {
-        return userService.getUserWithAuthorities()
-            .map(UserDTO::new)
-            .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+        Optional<User> user = userService.getUserWithAuthorities();
+        if(user.isPresent()){
+            UserDTO userDTO = new UserDTO(user.get());
+            log.debug("You got: " + userDTO.getEmail() + userDTO.getId());
+            Optional<UserExtra> userExtra = userExtraRepository.findOneByUser_Id(userDTO.getId());
+            if(!userExtra.isPresent()){
+                //ukoliko se admin uloguje da ne bi doslo do pucanja programa
+                UserExtra newUserExtra = new UserExtra();
+                newUserExtra.setUser(user.get());
+                newUserExtra.setCity("");
+                newUserExtra.setPhone("");
+            } else {
+                userDTO.setCity(userExtra.get().getCity());
+                userDTO.setPhone(userExtra.get().getPhone());
+            }
+            return userDTO;
+        }
+        throw new InternalServerErrorException("User could not be found");
+
+        //return userService.getUserWithAuthorities()
+        //    .map(UserDTO::new)
+        //    .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
     }
 
     /**
@@ -116,6 +140,7 @@ public class AccountResource {
     @PostMapping("/account")
     @Timed
     public void saveAccount(@Valid @RequestBody UserDTO userDTO) {
+        log.debug("pokusavamo da snimimo acc" + userDTO.getCity());
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userLogin))) {
@@ -125,8 +150,7 @@ public class AccountResource {
         if (!user.isPresent()) {
             throw new InternalServerErrorException("User could not be found");
         }
-        userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-            userDTO.getLangKey(), userDTO.getImageUrl());
+        userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(), userDTO.getLangKey(), userDTO.getImageUrl(), userDTO.getPhone(), userDTO.getCity());
     }
 
     /**

@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -186,7 +187,8 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String phone, String city) {
+        //System.out.println("/n/n/n/n/n/n/nTrenutni user: " + email.toLowerCase());
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -195,8 +197,14 @@ public class UserService {
                 user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+
+                userExtraRepository.findOneByUser_Id(user.getId()).ifPresent(userExtra -> {
+                    userExtra.setPhone(phone);
+                    userExtra.setCity(city);
+                    log.debug("Changed user extra info");
+                });
                 this.clearUserCaches(user);
-                log.debug("Changed Information for User: {}", user);
+                log.debug("Changed Information for User1: {}", user);
             });
     }
 

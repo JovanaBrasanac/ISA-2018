@@ -51,6 +51,10 @@ public class UserDTO {
 
     private Instant lastModifiedDate;
 
+    private String phone;
+
+    private String city;
+
     private Set<String> authorities;
 
     public UserDTO() {
@@ -113,6 +117,22 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone= phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getImageUrl() {
@@ -186,6 +206,8 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
+            ", city='" + city + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
