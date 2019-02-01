@@ -3,8 +3,10 @@ package com.ftn.tickets.service;
 import com.ftn.tickets.config.Constants;
 import com.ftn.tickets.domain.Authority;
 import com.ftn.tickets.domain.User;
+import com.ftn.tickets.domain.UserExtra;
 import com.ftn.tickets.repository.AuthorityRepository;
 import com.ftn.tickets.repository.UserRepository;
+import com.ftn.tickets.repository.UserExtraRepository;
 import com.ftn.tickets.security.AuthoritiesConstants;
 import com.ftn.tickets.security.SecurityUtils;
 import com.ftn.tickets.service.dto.UserDTO;
@@ -43,8 +45,11 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final UserExtraRepository userExtraRepository;
+
+    public UserService(UserRepository userRepository, UserExtraRepository userExtraRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
+        this.userExtraRepository = userExtraRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
@@ -87,7 +92,7 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password, String phone, String city) {
         userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).ifPresent(existingUser -> {
             boolean removed = removeNonActivatedUser(existingUser);
             if (!removed) {
@@ -120,6 +125,14 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        //Create and save the UserExtra entity
+        UserExtra newUserExtra = new UserExtra();
+        newUserExtra.setUser(newUser);
+        newUserExtra.setPhone(phone);
+        newUserExtra.setCity(city);
+        userExtraRepository.save(newUserExtra);
+
         return newUser;
     }
 
