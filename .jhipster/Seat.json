@@ -1,0 +1,80 @@
+{
+    "name": "Seat",
+    "fields": [
+        {
+            "fieldName": "seatType",
+            "fieldType": "SeatType",
+            "fieldValues": "BUSINESS,REGULAR,FIRST",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "row",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "column",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "reserved",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateOfSale",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "timeOfSale",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "ticket",
+            "otherEntityName": "ticket",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "seat"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "allSeats",
+            "otherEntityName": "allSeatsConfiguration",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "discount",
+            "otherEntityName": "discount",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190203145909",
+    "entityTableName": "seat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
 import { LoginModalService, AccountService, Account } from 'app/core';
+import { IUserExtra } from '../shared/model/user-extra.model';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { UserExtraService } from 'app/entities/user-extra';
 
 @Component({
     selector: 'jhi-home',
@@ -13,13 +16,24 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
 
+    userExtras: IUserExtra[];
+
     constructor(
         private accountService: AccountService,
         private loginModalService: LoginModalService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        protected userExtraService: UserExtraService,
+        protected jhiAlertService: JhiAlertService
     ) {}
 
+    loadAll() {
+        this.userExtraService.query().subscribe((res: HttpResponse<IUserExtra[]>) => {
+            this.userExtras = res.body;
+        });
+    }
+
     ngOnInit() {
+        this.loadAll();
         this.accountService.identity().then(account => {
             this.account = account;
         });
@@ -32,6 +46,10 @@ export class HomeComponent implements OnInit {
                 this.account = account;
             });
         });
+    }
+
+    trackId(index: number, item: IUserExtra) {
+        return item.id;
     }
 
     isAuthenticated() {

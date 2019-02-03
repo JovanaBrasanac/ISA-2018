@@ -127,13 +127,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_locationOfChanges">Location Of Changes</label>
                     <input type="text" class="form-control" name="locationOfChanges" id="field_locationOfChanges"
-                        [(ngModel)]="flight.locationOfChanges" required/>
-                    <div [hidden]="!(editForm.controls.locationOfChanges?.dirty && editForm.controls.locationOfChanges?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.locationOfChanges?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
+                        [(ngModel)]="flight.locationOfChanges" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_flightCode">Flight Code</label>

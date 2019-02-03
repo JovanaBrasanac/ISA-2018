@@ -33,7 +33,7 @@ export const flightRoute: Routes = [
         path: 'flight',
         component: FlightComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Flights'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const flightRoute: Routes = [
             flight: FlightResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Flights'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const flightRoute: Routes = [
             flight: FlightResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Flights'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const flightRoute: Routes = [
             flight: FlightResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Flights'
         },
         canActivate: [UserRouteAccessService]

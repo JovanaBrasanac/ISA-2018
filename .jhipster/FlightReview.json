@@ -1,0 +1,36 @@
+{
+    "name": "FlightReview",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "grade",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "ticket",
+            "otherEntityName": "ticket",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "flightReview"
+        }
+    ],
+    "changelogDate": "20190203145913",
+    "entityTableName": "flight_review",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

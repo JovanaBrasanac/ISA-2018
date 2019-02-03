@@ -62,7 +62,6 @@ public class Flight implements Serializable {
     @Column(name = "number_of_changes", nullable = false)
     private Integer numberOfChanges;
 
-    @NotNull
     @Column(name = "location_of_changes", nullable = false)
     private String locationOfChanges;
 

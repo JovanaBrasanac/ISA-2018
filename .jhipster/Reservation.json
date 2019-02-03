@@ -1,0 +1,33 @@
+{
+    "name": "Reservation",
+    "fields": [
+        {
+            "fieldName": "numberOfSeats",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "tickets",
+            "otherEntityName": "ticket",
+            "otherEntityRelationshipName": "reservation"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "reservingUser",
+            "otherEntityName": "userExtra",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190203145911",
+    "entityTableName": "reservation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

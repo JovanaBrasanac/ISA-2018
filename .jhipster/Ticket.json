@@ -1,0 +1,50 @@
+{
+    "name": "Ticket",
+    "fields": [
+        {
+            "fieldName": "accepted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "seat",
+            "otherEntityName": "seat",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "ticket"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "airportReview",
+            "otherEntityName": "airportReview",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "ticket"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "flightReview",
+            "otherEntityName": "flightReview",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "ticket"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "reservation",
+            "otherEntityName": "reservation",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190203145910",
+    "entityTableName": "ticket",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

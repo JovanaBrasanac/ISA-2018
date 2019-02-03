@@ -1,0 +1,50 @@
+{
+    "name": "AllSeatsConfiguration",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "rows",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "columns",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "setas",
+            "otherEntityName": "seat",
+            "otherEntityRelationshipName": "allSeats"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "flight",
+            "otherEntityName": "flight",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "allSeats"
+        }
+    ],
+    "changelogDate": "20190203145908",
+    "entityTableName": "all_seats_configuration",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

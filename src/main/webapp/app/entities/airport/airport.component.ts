@@ -6,6 +6,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IAirport } from 'app/shared/model/airport.model';
 import { AccountService } from 'app/core';
 import { AirportService } from './airport.service';
+import { IUserExtra, UserExtra } from 'app/shared/model/user-extra.model';
+import { UserExtraService } from 'app/entities/user-extra';
 
 @Component({
     selector: 'jhi-airport',
@@ -13,17 +15,31 @@ import { AirportService } from './airport.service';
 })
 export class AirportComponent implements OnInit, OnDestroy {
     airports: IAirport[];
-    currentAccount: any;
+    tempAirports: IAirport[];
+    currentAccount: Account;
     eventSubscriber: Subscription;
+
+    userExtras: IUserExtra[];
+    isAdminForId: number;
 
     constructor(
         protected airportService: AirportService,
         protected jhiAlertService: JhiAlertService,
         protected eventManager: JhiEventManager,
+        protected userExtraService: UserExtraService,
         protected accountService: AccountService
     ) {}
 
     loadAll() {
+        this.userExtraService.query().subscribe((res: HttpResponse<IUserExtra[]>) => {
+            this.userExtras = res.body;
+            for (let i = 0; i < this.userExtras.length; i++) {
+                if (this.userExtras[i].user.id === this.currentAccount.id) {
+                    // code of airline which user is admin for
+                    this.isAdminForId = this.userExtras[i].airlineAdmin.id;
+                }
+            }
+        });
         this.airportService.query().subscribe(
             (res: HttpResponse<IAirport[]>) => {
                 this.airports = res.body;

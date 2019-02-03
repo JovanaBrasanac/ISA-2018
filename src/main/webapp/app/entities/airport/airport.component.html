@@ -22,7 +22,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let airport of airports ;trackBy: trackId">
+            <ng-container *ngFor="let airport of airports ;trackBy: trackId">
+            <tr *ngIf="airport.airline.id === isAdminForId">
                 <td><a [routerLink]="['/airport', airport.id, 'view' ]">{{airport.id}}</a></td>
                 <td>{{airport.name}}</td>
                 <td>{{airport.address}}</td>
@@ -56,6 +57,7 @@
                     </div>
                 </td>
             </tr>
+            </ng-container>
             </tbody>
         </table>
     </div>

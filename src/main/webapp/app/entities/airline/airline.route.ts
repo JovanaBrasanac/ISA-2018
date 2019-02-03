@@ -45,7 +45,7 @@ export const airlineRoute: Routes = [
             airline: AirlineResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Airlines'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const airlineRoute: Routes = [
             airline: AirlineResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Airlines'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const airlineRoute: Routes = [
             airline: AirlineResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Airlines'
         },
         canActivate: [UserRouteAccessService]

@@ -23,9 +23,11 @@
         </div>
         <div *jhiHasAnyAuthority="'ROLE_AIRLINE_ADMIN'">
             <span>Your airline: </span>
-            <div *ngIf="userExtra.airlineAdmin">
+            <tr *ngFor="let userExtra of userExtras ;trackBy: trackId">
+            <td *ngIf="userExtra.user.id === account.id">
                 <a [routerLink]="['../airline', userExtra.airlineAdmin?.id, 'view' ]" >{{userExtra.airlineAdmin?.name}}</a>
-            </div>
+            </td>
+            </tr>
         </div>
 
         <p>

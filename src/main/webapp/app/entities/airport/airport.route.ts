@@ -33,7 +33,7 @@ export const airportRoute: Routes = [
         path: 'airport',
         component: AirportComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Airports'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const airportRoute: Routes = [
             airport: AirportResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_AIRLINE_ADMIN'],
             pageTitle: 'Airports'
         },
         canActivate: [UserRouteAccessService]
