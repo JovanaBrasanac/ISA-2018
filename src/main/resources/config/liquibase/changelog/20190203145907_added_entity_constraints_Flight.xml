@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Flight.
+    -->
+    <changeSet id="20190203145907-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="all_seats_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight_all_seats_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="all_seats_configuration"/>
+
+        <addForeignKeyConstraint baseColumnNames="airport_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight_airport_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="airport"/>
+
+    </changeSet>
+</databaseChangeLog>

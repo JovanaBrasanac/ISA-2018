@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="flight">
+            <h2><span>Flight</span> {{flight.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Start Location</span></dt>
+                <dd>
+                    <span>{{flight.startLocation}}</span>
+                </dd>
+                <dt><span>End Location</span></dt>
+                <dd>
+                    <span>{{flight.endLocation}}</span>
+                </dd>
+                <dt><span>Start Date</span></dt>
+                <dd>
+                    <span>{{flight.startDate}}</span>
+                </dd>
+                <dt><span>End Date</span></dt>
+                <dd>
+                    <span>{{flight.endDate}}</span>
+                </dd>
+                <dt><span>Start Time</span></dt>
+                <dd>
+                    <span>{{flight.startTime}}</span>
+                </dd>
+                <dt><span>End Time</span></dt>
+                <dd>
+                    <span>{{flight.endTime}}</span>
+                </dd>
+                <dt><span>Time Of Flight</span></dt>
+                <dd>
+                    <span>{{flight.timeOfFlight}}</span>
+                </dd>
+                <dt><span>Length</span></dt>
+                <dd>
+                    <span>{{flight.length}}</span>
+                </dd>
+                <dt><span>Number Of Changes</span></dt>
+                <dd>
+                    <span>{{flight.numberOfChanges}}</span>
+                </dd>
+                <dt><span>Location Of Changes</span></dt>
+                <dd>
+                    <span>{{flight.locationOfChanges}}</span>
+                </dd>
+                <dt><span>Flight Code</span></dt>
+                <dd>
+                    <span>{{flight.flightCode}}</span>
+                </dd>
+                <dt><span>All Seats</span></dt>
+                <dd>
+                    <div *ngIf="flight.allSeats">
+                        <a [routerLink]="['/all-seats-configuration', flight.allSeats?.id, 'view']">{{flight.allSeats?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Airport</span></dt>
+                <dd>
+                    <div *ngIf="flight.airport">
+                        <a [routerLink]="['/airport', flight.airport?.id, 'view']">{{flight.airport?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/flight', flight.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

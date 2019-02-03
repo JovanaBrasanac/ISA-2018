@@ -18,16 +18,22 @@
             <th><span>Phone</span></th>
             <th><span>City</span></th>
             <th><span>User</span></th>
+            <th><span>Airline Admin</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let userExtra of userExtras ;trackBy: trackId">
-                <td><a [routerLink]="['/user-extra', userExtra.id, 'view' ]">{{userExtra.id}}</a></td>
+                <td><a [routerLink]="['/user-extra', userExtra.email, 'view' ]">{{userExtra.email}}</a></td>
                 <td>{{userExtra.phone}}</td>
                 <td>{{userExtra.city}}</td>
                 <td>
-                    {{userExtra.user?.login}}
+                    {{userExtra.user?.id}}
+                </td>
+                <td>
+                    <div *ngIf="userExtra.airlineAdmin">
+                        <a [routerLink]="['../airline', userExtra.airlineAdmin?.id, 'view' ]" >{{userExtra.airlineAdmin?.name}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

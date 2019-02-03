@@ -15,7 +15,13 @@
                 </dd>
                 <dt><span>User</span></dt>
                 <dd>
-                    {{userExtra.user?.login}}
+                    {{userExtra.user?.id}}
+                </dd>
+                <dt><span>Airline Admin</span></dt>
+                <dd>
+                    <div *ngIf="userExtra.airlineAdmin">
+                        <a [routerLink]="['/airline', userExtra.airlineAdmin?.name, 'view']">{{userExtra.airlineAdmin?.name}}</a>
+                    </div>
                 </dd>
             </dl>
 

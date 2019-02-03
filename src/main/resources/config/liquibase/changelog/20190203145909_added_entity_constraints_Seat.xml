@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Seat.
+    -->
+    <changeSet id="20190203145909-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="all_seats_id"
+                                 baseTableName="seat"
+                                 constraintName="fk_seat_all_seats_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="all_seats_configuration"/>
+
+        <addForeignKeyConstraint baseColumnNames="discount_id"
+                                 baseTableName="seat"
+                                 constraintName="fk_seat_discount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="discount"/>
+
+    </changeSet>
+</databaseChangeLog>

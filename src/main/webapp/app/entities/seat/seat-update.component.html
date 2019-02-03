@@ -1,0 +1,129 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-seat-heading">Create or edit a Seat</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!seat.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="seat.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_seatType">Seat Type</label>
+                    <select class="form-control" name="seatType" [(ngModel)]="seat.seatType" id="field_seatType"  required>
+                        <option value="BUSINESS">BUSINESS</option>
+                        <option value="REGULAR">REGULAR</option>
+                        <option value="FIRST">FIRST</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.seatType?.dirty && editForm.controls.seatType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.seatType?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_row">Row</label>
+                    <input type="number" class="form-control" name="row" id="field_row"
+                        [(ngModel)]="seat.row" required/>
+                    <div [hidden]="!(editForm.controls.row?.dirty && editForm.controls.row?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.row?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.row?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_column">Column</label>
+                    <input type="number" class="form-control" name="column" id="field_column"
+                        [(ngModel)]="seat.column" required/>
+                    <div [hidden]="!(editForm.controls.column?.dirty && editForm.controls.column?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.column?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.column?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                        [(ngModel)]="seat.price" required/>
+                    <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.price?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.price?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_reserved">Reserved</label>
+                    <input type="checkbox" class="form-control" name="reserved" id="field_reserved"
+                        [(ngModel)]="seat.reserved" />
+                    <div [hidden]="!(editForm.controls.reserved?.dirty && editForm.controls.reserved?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.reserved?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateOfSale">Date Of Sale</label>
+                    <div class="input-group">
+                        <input id="field_dateOfSale" type="text" class="form-control" name="dateOfSale" ngbDatepicker  #dateOfSaleDp="ngbDatepicker" [(ngModel)]="seat.dateOfSale"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateOfSaleDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_timeOfSale">Time Of Sale</label>
+                    <input type="text" class="form-control" name="timeOfSale" id="field_timeOfSale"
+                        [(ngModel)]="seat.timeOfSale" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_allSeats">All Seats</label>
+                    <select class="form-control" id="field_allSeats" name="allSeats" [(ngModel)]="seat.allSeats"  required>
+                        <option *ngIf="!editForm.value.allSeats" [ngValue]="null" selected></option>
+                        <option [ngValue]="allSeatsConfigurationOption.id === seat.allSeats?.id ? seat.allSeats : allSeatsConfigurationOption" *ngFor="let allSeatsConfigurationOption of allseatsconfigurations; trackBy: trackAllSeatsConfigurationById">{{allSeatsConfigurationOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.allSeats?.dirty && editForm.controls.allSeats?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.allSeats?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_discount">Discount</label>
+                    <select class="form-control" id="field_discount" name="discount" [(ngModel)]="seat.discount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="discountOption.id === seat.discount?.id ? seat.discount : discountOption" *ngFor="let discountOption of discounts; trackBy: trackDiscountById">{{discountOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

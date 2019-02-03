@@ -31,6 +31,8 @@
             </column>
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_extra_user_id" />
+            </column>            <column name="airline_admin_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_extra_airline_admin_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>

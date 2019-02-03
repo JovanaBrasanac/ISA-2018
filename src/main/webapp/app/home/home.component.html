@@ -21,6 +21,12 @@
                 <a class="alert-link" routerLink="register">Register a new account</a>
             </div>
         </div>
+        <div *jhiHasAnyAuthority="'ROLE_AIRLINE_ADMIN'">
+            <span>Your airline: </span>
+            <div *ngIf="userExtra.airlineAdmin">
+                <a [routerLink]="['../airline', userExtra.airlineAdmin?.id, 'view' ]" >{{userExtra.airlineAdmin?.name}}</a>
+            </div>
+        </div>
 
         <p>
             If you have any question on JHipster:

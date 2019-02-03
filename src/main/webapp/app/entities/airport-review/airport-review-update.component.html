@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-airport-review-heading">Create or edit a Airport Review</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!airportReview.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="airportReview.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="airportReview.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_grade">Grade</label>
+                    <input type="number" class="form-control" name="grade" id="field_grade"
+                        [(ngModel)]="airportReview.grade" required/>
+                    <div [hidden]="!(editForm.controls.grade?.dirty && editForm.controls.grade?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.grade?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.grade?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ticket">Ticket</label>
+                    <select class="form-control" id="field_ticket" name="ticket" [(ngModel)]="airportReview.ticket" required>
+                        <option *ngIf="!editForm.value.ticket" [ngValue]="null" selected></option>
+                        <option [ngValue]="ticketOption.id === airportReview.ticket?.id ? airportReview.ticket : ticketOption" *ngFor="let ticketOption of tickets; trackBy: trackTicketById">{{ticketOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.ticket?.dirty && editForm.controls.ticket?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.ticket?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

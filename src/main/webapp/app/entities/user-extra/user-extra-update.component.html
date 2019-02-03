@@ -48,7 +48,14 @@
                     <label class="form-control-label" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" [(ngModel)]="userExtra.user" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === userExtra.user?.id ? userExtra.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                        <option [ngValue]="userOption.id === userExtra.user?.id ? userExtra.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_airlineAdmin">Airline Admin</label>
+                    <select class="form-control" id="field_airlineAdmin" name="airlineAdmin" [(ngModel)]="userExtra.airlineAdmin">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="airlineOption.id === userExtra.airlineAdmin?.id ? userExtra.airlineAdmin : airlineOption" *ngFor="let airlineOption of airlineadmins; trackBy: trackAirlineById">{{airlineOption.id}}</option>
                     </select>
                 </div>
             </div>

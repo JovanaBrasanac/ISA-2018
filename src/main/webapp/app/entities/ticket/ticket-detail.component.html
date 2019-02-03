@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="ticket">
+            <h2><span>Ticket</span> {{ticket.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Accepted</span></dt>
+                <dd>
+                    <span>{{ticket.accepted}}</span>
+                </dd>
+                <dt><span>Seat</span></dt>
+                <dd>
+                    <div *ngIf="ticket.seat">
+                        <a [routerLink]="['/seat', ticket.seat?.id, 'view']">{{ticket.seat?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Reservation</span></dt>
+                <dd>
+                    <div *ngIf="ticket.reservation">
+                        <a [routerLink]="['/reservation', ticket.reservation?.id, 'view']">{{ticket.reservation?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ticket', ticket.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

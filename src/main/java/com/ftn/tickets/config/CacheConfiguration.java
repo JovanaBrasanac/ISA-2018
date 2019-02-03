@@ -42,6 +42,22 @@ public class CacheConfiguration {
             cm.createCache(com.ftn.tickets.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.ftn.tickets.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.ftn.tickets.domain.UserExtra.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Airline.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Airline.class.getName() + ".airports", jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Airport.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Airport.class.getName() + ".flights", jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Flight.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.AllSeatsConfiguration.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.AllSeatsConfiguration.class.getName() + ".setas", jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Seat.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Ticket.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Reservation.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Reservation.class.getName() + ".tickets", jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.AirportReview.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.FlightReview.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.UserExtra.class.getName() + ".reservations", jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Discount.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ftn.tickets.domain.Discount.class.getName() + ".seats", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

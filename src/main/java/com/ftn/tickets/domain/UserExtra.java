@@ -1,5 +1,6 @@
 package com.ftn.tickets.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -20,6 +23,7 @@ public class UserExtra implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -32,10 +36,15 @@ public class UserExtra implements Serializable {
     @Column(name = "city", length = 50, nullable = false)
     private String city;
 
-    @OneToOne
-    @MapsId
+    @OneToOne    @JoinColumn(unique = true)
     private User user;
 
+    @OneToOne    @JoinColumn(unique = true)
+    private Airline airlineAdmin;
+
+    @OneToMany(mappedBy = "reservingUser")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Reservation> reservations = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -82,6 +91,44 @@ public class UserExtra implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Airline getAirlineAdmin() {
+        return airlineAdmin;
+    }
+
+    public UserExtra airlineAdmin(Airline airline) {
+        this.airlineAdmin = airline;
+        return this;
+    }
+
+    public void setAirlineAdmin(Airline airline) {
+        this.airlineAdmin = airline;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public UserExtra reservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+        return this;
+    }
+
+    public UserExtra addReservations(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setReservingUser(this);
+        return this;
+    }
+
+    public UserExtra removeReservations(Reservation reservation) {
+        this.reservations.remove(reservation);
+        reservation.setReservingUser(null);
+        return this;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

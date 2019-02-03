@@ -1,0 +1,62 @@
+<div>
+    <h2 id="page-heading">
+        <span>Airlines</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-airline" [routerLink]="['/airline/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Airline
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="airlines">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Address</span></th>
+            <th><span>Description</span></th>
+            <th><span>Latitude</span></th>
+            <th><span>Longitude</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let airline of airlines ;trackBy: trackId">
+                <td><a [routerLink]="['/airline', airline.id, 'view' ]">{{airline.id}}</a></td>
+                <td>{{airline.name}}</td>
+                <td>{{airline.address}}</td>
+                <td>{{airline.description}}</td>
+                <td>{{airline.latitude}}</td>
+                <td>{{airline.longitude}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/airline', airline.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/airline', airline.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'airline/'+ airline.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

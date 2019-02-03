@@ -6,7 +6,24 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190201110730_added_entity_UserExtra.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145905_added_entity_Airline.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145906_added_entity_Airport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145907_added_entity_Flight.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145908_added_entity_AllSeatsConfiguration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145909_added_entity_Seat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145910_added_entity_Ticket.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145911_added_entity_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145912_added_entity_AirportReview.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145913_added_entity_FlightReview.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203151355_added_entity_Discount.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190201110730_added_entity_constraints_UserExtra.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145906_added_entity_constraints_Airport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145907_added_entity_constraints_Flight.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145909_added_entity_constraints_Seat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145910_added_entity_constraints_Ticket.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145911_added_entity_constraints_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145912_added_entity_constraints_AirportReview.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190203145913_added_entity_constraints_FlightReview.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

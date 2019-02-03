@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span>Flights</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-flight" [routerLink]="['/flight/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Flight
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="flights">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Start Location</span></th>
+            <th><span>End Location</span></th>
+            <th><span>Start Date</span></th>
+            <th><span>End Date</span></th>
+            <th><span>Start Time</span></th>
+            <th><span>End Time</span></th>
+            <th><span>Time Of Flight</span></th>
+            <th><span>Length</span></th>
+            <th><span>Number Of Changes</span></th>
+            <th><span>Location Of Changes</span></th>
+            <th><span>Flight Code</span></th>
+            <th><span>All Seats</span></th>
+            <th><span>Airport</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let flight of flights ;trackBy: trackId">
+                <td><a [routerLink]="['/flight', flight.id, 'view' ]">{{flight.id}}</a></td>
+                <td>{{flight.startLocation}}</td>
+                <td>{{flight.endLocation}}</td>
+                <td>{{flight.startDate | date:'mediumDate'}}</td>
+                <td>{{flight.endDate | date:'mediumDate'}}</td>
+                <td>{{flight.startTime}}</td>
+                <td>{{flight.endTime}}</td>
+                <td>{{flight.timeOfFlight}}</td>
+                <td>{{flight.length}}</td>
+                <td>{{flight.numberOfChanges}}</td>
+                <td>{{flight.locationOfChanges}}</td>
+                <td>{{flight.flightCode}}</td>
+                <td>
+                    <div *ngIf="flight.allSeats">
+                        <a [routerLink]="['../all-seats-configuration', flight.allSeats?.id, 'view' ]" >{{flight.allSeats?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="flight.airport">
+                        <a [routerLink]="['../airport', flight.airport?.id, 'view' ]" >{{flight.airport?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/flight', flight.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/flight', flight.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'flight/'+ flight.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

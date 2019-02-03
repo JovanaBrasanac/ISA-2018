@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="airline_admin_id"
+                                 baseTableName="user_extra"
+                                 constraintName="fk_user_extra_airline_admin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="airline"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="seat">
+            <h2><span>Seat</span> {{seat.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Seat Type</span></dt>
+                <dd>
+                    <span>{{seat.seatType}}</span>
+                </dd>
+                <dt><span>Row</span></dt>
+                <dd>
+                    <span>{{seat.row}}</span>
+                </dd>
+                <dt><span>Column</span></dt>
+                <dd>
+                    <span>{{seat.column}}</span>
+                </dd>
+                <dt><span>Price</span></dt>
+                <dd>
+                    <span>{{seat.price}}</span>
+                </dd>
+                <dt><span>Reserved</span></dt>
+                <dd>
+                    <span>{{seat.reserved}}</span>
+                </dd>
+                <dt><span>Date Of Sale</span></dt>
+                <dd>
+                    <span>{{seat.dateOfSale}}</span>
+                </dd>
+                <dt><span>Time Of Sale</span></dt>
+                <dd>
+                    <span>{{seat.timeOfSale}}</span>
+                </dd>
+                <dt><span>All Seats</span></dt>
+                <dd>
+                    <div *ngIf="seat.allSeats">
+                        <a [routerLink]="['/all-seats-configuration', seat.allSeats?.id, 'view']">{{seat.allSeats?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Discount</span></dt>
+                <dd>
+                    <div *ngIf="seat.discount">
+                        <a [routerLink]="['/discount', seat.discount?.id, 'view']">{{seat.discount?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/seat', seat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
