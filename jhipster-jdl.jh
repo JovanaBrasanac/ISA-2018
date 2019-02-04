@@ -1,0 +1,100 @@
+entity Airline {
+	name String required maxlength(100)
+    address String required maxlength(100)
+    description String required maxlength(1000)
+    latitude Float
+    longitude Float
+}
+
+entity Airport {
+	name String required maxlength(100)
+    address String required maxlength(100)
+}
+
+entity Flight {
+	startLocation String required maxlength(100)
+    endLocation String required maxlength(100)
+	startDate LocalDate required
+    endDate LocalDate required
+    startTime String required
+    endTime String required
+    timeOfFlight String required 
+    length String 
+    numberOfChanges Integer required
+    locationOfChanges String required
+    flightCode String required
+}
+
+entity Discount {
+	name String required
+    percentage Float required
+}
+
+entity AllSeatsConfiguration {
+	name String required
+	rows Integer required
+    columns Integer required
+}
+
+entity Seat {
+	seatType SeatType required
+    row Integer required
+    column Integer required
+    price Integer required
+    reserved Boolean required
+    price Float required
+    dateOfSale LocalDate
+    timeOfSale String
+}
+
+entity Ticket {
+	accepted Boolean
+}
+
+entity Reservation {
+	numberOfSeats Integer
+}
+
+entity AirportReview {
+	description String
+	grade Integer required
+}
+
+entity FlightReview {
+	description String
+	grade Integer required
+}
+
+
+
+enum SeatType{
+	BUSINESS, REGULAR, FIRST
+}
+
+entity UserExtra {
+  phone String required minlength(5) maxlength(20),
+  city String required maxlength(50)
+}
+relationship OneToOne {
+  UserExtra{user} to User
+}
+
+relationship OneToMany {
+	Reservation{tickets} to Ticket{reservation required},
+	Airline{airports} to Airport{airline required},
+	Airport{flights} to Flight{airport required},
+	AllSeatsConfiguration{setas} to Seat{allSeats required},
+	UserExtra{reservations} to Reservation{reservingUser required},
+    Discount{seats required} to Seat{discount}  
+}
+
+
+
+
+relationship OneToOne{
+	Flight{allSeats required} to AllSeatsConfiguration{flight}
+	Ticket{seat required} to Seat{ticket}
+	AirportReview{ticket required} to Ticket{airportReview}
+	FlightReview{ticket required} to Ticket{flightReview}
+    UserExtra{airlineAdmin} to Airline{admin}
+}
